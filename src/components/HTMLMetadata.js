@@ -13,13 +13,47 @@ function HTMLMetadata({ metadata }) {
       }
     }
   `);
+
+  const metaDescription = metadata.meta || data.site.siteMetadata.description;
+  const title = metadata.title;
+
   return (
     <Helmet
       htmlAttributes={{
         lang: data.site.siteMetadata.lang
       }}
       title={metadata.title}
-      meta={metadata.meta}
+      titleTemplate={`%s | ${metadata.title}`}
+      meta={[
+        {
+          name: `description`,
+          content: metaDescription
+        },
+        {
+          property: `og:title`,
+          content: title
+        },
+        {
+          property: `og:description`,
+          content: metaDescription
+        },
+        {
+          property: `og:type`,
+          content: `website`
+        },
+        {
+          name: `twitter:card`,
+          content: `summary`
+        },
+        {
+          name: `twitter:title`,
+          content: title
+        },
+        {
+          name: `twitter:description`,
+          content: metaDescription
+        }
+      ].concat(metadata)}
     />
   );
 }

@@ -98,7 +98,7 @@ config.plugins = [
   //  }
   //},
   // gatsby-plugin-offline MUST BE USED AFTER MANIFEST !
-  `gatsby-plugin-offline`,
+  //`gatsby-plugin-offline`,
   `gatsby-plugin-react-helmet`,
   {
     resolve: "gatsby-plugin-load-script",
