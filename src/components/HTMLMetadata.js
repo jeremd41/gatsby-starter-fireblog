@@ -1,9 +1,16 @@
+/**
+ * SEO component that queries for data with
+ *  Gatsby's useStaticQuery React hook
+ *
+ * See: https://www.gatsbyjs.org/docs/use-static-query/
+ */
+
 import React from "react";
 import PropTypes from "prop-types";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 import { useStaticQuery, graphql } from "gatsby";
 
-function HTMLMetadata({ metadata }) {
+function HTMLMetadata({ description, lang, meta, title }) {
   const data = useStaticQuery(graphql`
     query DefaultSEOQuery {
       site {
@@ -14,20 +21,17 @@ function HTMLMetadata({ metadata }) {
     }
   `);
 
-  const metaDescription = metadata.meta || data.site.siteMetadata.description;
-  const title = metadata.title;
-
   return (
     <Helmet
       htmlAttributes={{
         lang: data.site.siteMetadata.lang
       }}
-      title={metadata.title}
-      titleTemplate={`%s | ${metadata.title}`}
+      title={title}
+      titleTemplate={`%s | ${title}`}
       meta={[
         {
           name: `description`,
-          content: metaDescription
+          content: description
         },
         {
           property: `og:title`,
@@ -35,7 +39,7 @@ function HTMLMetadata({ metadata }) {
         },
         {
           property: `og:description`,
-          content: metaDescription
+          content: description
         },
         {
           property: `og:type`,
@@ -51,15 +55,23 @@ function HTMLMetadata({ metadata }) {
         },
         {
           name: `twitter:description`,
-          content: metaDescription
+          content: description
         }
-      ].concat(metadata)}
+      ].concat(meta)}
     />
   );
 }
+HTMLMetadata.defaultProps = {
+  lang: `en`,
+  meta: [],
+  description: ``
+};
 
 HTMLMetadata.propTypes = {
-  metadata: PropTypes.object.isRequired
+  description: PropTypes.string,
+  lang: PropTypes.string,
+  meta: PropTypes.arrayOf(PropTypes.object),
+  title: PropTypes.string.isRequired
 };
 
 export default HTMLMetadata;
