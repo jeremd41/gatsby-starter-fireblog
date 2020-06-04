@@ -21,6 +21,8 @@ function HTMLMetadata({ description, lang, meta, title }) {
     }
   `);
 
+  const metaDescription = description;
+
   return (
     <Helmet
       htmlAttributes={{
@@ -31,7 +33,7 @@ function HTMLMetadata({ description, lang, meta, title }) {
       meta={[
         {
           name: `description`,
-          content: description
+          content: metaDescription
         },
         {
           property: `og:title`,
@@ -39,7 +41,7 @@ function HTMLMetadata({ description, lang, meta, title }) {
         },
         {
           property: `og:description`,
-          content: description
+          content: metaDescription
         },
         {
           property: `og:type`,
@@ -55,7 +57,7 @@ function HTMLMetadata({ description, lang, meta, title }) {
         },
         {
           name: `twitter:description`,
-          content: description
+          content: metaDescription
         }
       ].concat(meta)}
     />
